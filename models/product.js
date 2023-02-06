@@ -5,12 +5,19 @@ const Schema = mongoose.Schema;
 const ProductSchema = new Schema({
   name: { type: String, required: true, maxLength: 100 },
   price: { type: Number, required: true },
-  pieceCount: { type: Number },
+  pieceCount: { type: Number, required: true },
   theme: { type: Schema.Types.ObjectId, ref: 'Theme', required: true },
+  setNumber: { type: Number, required: true },
   difficulty: {
-    type: Schema.Types.ObjectId,
-    ref: 'Difficulty',
+    type: String,
     required: true,
+    enum: [
+      '0 - Beginner',
+      '1 - Intermediate',
+      '2 - Advanced',
+      '3 - Expert',
+      '4 - Master',
+    ],
   },
 });
 
