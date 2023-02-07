@@ -9,7 +9,6 @@ const userArgs = process.argv.slice(2);
 
 const async = require('async');
 const Product = require('./models/product');
-const Difficulty = require('./models/difficulty');
 const Theme = require('./models/theme');
 const ProductInstance = require('./models/productinstance');
 
@@ -23,26 +22,9 @@ async function main() {
   await mongoose.connect(mongoDB);
 }
 
-const difficulties = [];
 const themes = [];
 const products = [];
 const productinstances = [];
-
-function difficultyCreate(level, cb) {
-  difficultydetail = { level: level };
-
-  const difficulty = new Difficulty(difficultydetail);
-
-  difficulty.save(function (err) {
-    if (err) {
-      cb(err, null);
-      return;
-    }
-    console.log('New Difficulty: ' + difficulty);
-    difficulties.push(difficulty);
-    cb(null, difficulty);
-  });
-}
 
 function themeCreate(name, cb) {
   const theme = new Theme({ name: name });
@@ -110,27 +92,6 @@ function productInstanceCreate(product, status, cb) {
 function createThemes(cb) {
   async.series(
     [
-      // function (callback) {
-      //   difficultyCreate('Patrick', 'Rothfuss', '1973-06-06', false, callback);
-      // },
-      // function (callback) {
-      //   difficultyCreate('Ben', 'Bova', '1932-11-8', false, callback);
-      // },
-      // function (callback) {
-      //   difficultyCreate(
-      //     'Isaac',
-      //     'Asimov',
-      //     '1920-01-02',
-      //     '1992-04-06',
-      //     callback
-      //   );
-      // },
-      // function (callback) {
-      //   difficultyCreate('Bob', 'Billings', false, false, callback);
-      // },
-      // function (callback) {
-      //   difficultyCreate('Jim', 'Jones', '1971-12-16', false, callback);
-      // },
       function (callback) {
         themeCreate('Technic', callback);
       },
