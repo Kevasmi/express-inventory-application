@@ -5,7 +5,9 @@ const async = require('async');
 const { body, validationResult } = require('express-validator');
 
 exports.index = (req, res) => {
-  res.send('No implementation for index page.');
+  res.render('index', {
+    title: 'Check It Out!',
+  });
 };
 
 // Display list of products.
