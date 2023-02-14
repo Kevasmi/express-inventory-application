@@ -1,13 +1,35 @@
 const Product = require('../models/product');
 const ProductInstance = require('../models/productinstance');
+const Theme = require('../models/theme');
 
 const async = require('async');
 const { body, validationResult } = require('express-validator');
+const { populate } = require('../models/product');
 
-exports.index = (req, res) => {
-  res.render('index', {
-    title: 'Check It Out!',
-  });
+exports.index = (req, res, next) => {
+  async.parallel(
+    {
+      products(callback) {
+        Product.find({}).populate('theme').exec(callback);
+      },
+      productinstances(callback) {
+        ProductInstance.find({}).populate('product').exec(callback);
+      },
+      themes(callback) {
+        Theme.find({}).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) {
+        return next(err);
+      }
+      res.render('index', {
+        title: 'Check it out!',
+        data: results,
+        error: err,
+      });
+    }
+  );
 };
 
 // Display list of products.
