@@ -3,3 +3,25 @@ extends layout
 block content
   h1= title
   p Welcome to Lego!
+
+  ul.product-list 
+    each product in data.products
+      li.product-card 
+        p #[strong # #{product.setNumber}]
+        img(src=product.image alt='Product Image' )
+        a(href=product.url) 
+          h2 #{product.name}
+        h5 $#{product.price}
+        p.card-piece-count Piece Count: #{product.pieceCount}
+        p.card-theme Theme: #{product.theme.name}
+        p #[strong Difficulty:] 
+          if product.difficulty=='0 - Beginner'
+            span.text-success #{product.difficulty}
+          else if product.difficulty=='1 - Intermediate'
+            span.text-info #{product.difficulty}
+          else if product.difficulty=='2 - Advanced'
+            span.text-primary #{product.difficulty}
+          else if product.difficulty=='3 - Expert'
+            span.text-warning #{product.difficulty}
+          else if product.difficulty=='4 - Master'
+            span.text-danger #{product.difficulty}

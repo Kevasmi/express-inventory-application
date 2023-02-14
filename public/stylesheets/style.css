@@ -1,3 +1,7 @@
+body {
+  background-color: rgb(244, 244, 244);
+}
+
 li {
   color: black;
 }
@@ -11,4 +15,23 @@ a.nav-link {
 
 a.nav-link:hover {
   border-bottom: 4px solid black;
+}
+
+.product-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.product-card {
+  padding: 2rem;
+  border: 1px solid rgba(80, 80, 80, 50);
+  border-radius: 1rem;
+  background-color: white;
+}
+
+.product-card img {
+  max-width: 500px;
+  height: 400px;
 }
