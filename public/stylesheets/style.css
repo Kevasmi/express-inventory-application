@@ -1,8 +1,14 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+li {
+  color: black;
 }
 
-a {
-  color: #00B7FF;
+a.nav-link {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: black;
+  border-bottom: 4px solid transparent;
+}
+
+a.nav-link:hover {
+  border-bottom: 4px solid black;
 }

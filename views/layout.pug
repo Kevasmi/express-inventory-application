@@ -1,7 +1,70 @@
 doctype html
-html
+html(lang='en')
   head
     title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css", integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z", crossorigin="anonymous")
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js", integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj", crossorigin="anonymous")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js", integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV", crossorigin="anonymous")
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    nav.navbar.navbar-expand-lg.bg-body-tertiary(style='background-color: yellow')
+      .container-fluid
+        a.navbar-brand(href='#')
+          img(src='http://localhost:3000/images/lego-logo.png' alt='Lego Logo' width='74' height='64')
+        button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        #navbarNavDropdown.collapse.navbar-collapse
+          ul.navbar-nav
+            li.nav-item
+              a.nav-link(href='#') Products
+            li.nav-item
+              a.nav-link(href='#') Themes
+            li.nav-item(style='margin-right: 2rem')
+              a.nav-link(href='#') Inventory
+            li.nav-item
+              a.nav-link(href='#') Create Product
+            li.nav-item
+              a.nav-link(href='#') Create Theme
+            li.nav-item
+              a.nav-link(href='#') Create Inventory              
+
+            //- li.nav-item.dropdown
+            //-   a.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false')
+            //-     | Create
+            //-   ul.dropdown-menu
+            //-     li
+            //-       a.dropdown-item(href='#') Create Product
+            //-     li
+            //-       a.dropdown-item(href='#') Create Theme
+            //-     li
+            //-       a.dropdown-item(href='#') Create Inventory
+
+    div(style='padding: 2rem')
+      block content
+
+    //- div(class='navbar  navbar-expand-lg')
+    //-   div(class='container-fluid')
+    //-     div(class='row')
+    //-       div(class='col-sm-2')
+    //-         block sidebar
+    //-           ul(class='navbar-nav')
+    //-             li(class='nav-item')
+    //-               a(href='/catalog') Home
+    //-             li(class='nav-item')
+    //-               a(href='/catalog/themes') Themes
+    //-             li(class='nav-item')
+    //-               a(href='/catalog/products') Products
+    //-             li(class='nav-item')
+    //-               a(href='/catalog/genres') Inventory
+    //-               hr
+    //-             li(class='nav-item')
+    //-               a(href='/catalog/theme/create') Add new theme
+    //-             li(class='nav-item')
+    //-               a(href='/catalog/product/create') Add new product
+    //-             li(class='nav-item')
+    //-               a(href='/catalog/productinstance/create') Create new inventory
+
+    //-       div(class='col-sm-10')
+    //-         block content
