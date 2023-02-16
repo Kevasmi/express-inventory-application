@@ -1,0 +1,24 @@
+extends layout 
+
+block content 
+  h1 ID: #{productinstance._id}
+
+  p #[strong Product:] 
+    a(href=productinstance.product.url) #{productinstance.product.name}
+
+  p #[strong Status:] 
+      if productinstance.status == 'Like New'
+        h4.text-success #{productinstance.status}
+      else if productinstance.status == 'Good'
+        h4.text-info #{productinstance.status} 
+      else if productinstance.status == 'Fair'
+        h4.text-warning #{productinstance.status}
+      else 
+        h4.text-danger #{productinstance.status}
+
+
+  hr
+  p
+    a(href=productinstance.url+'/delete') Delete Inventory
+  p
+    a(href=productinstance.url+'/update') Update Inventory
