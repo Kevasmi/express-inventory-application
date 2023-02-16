@@ -1,4 +1,5 @@
 const Theme = require('../models/theme');
+const Product = require('../models/product');
 
 const async = require('async');
 const { body, validationResult } = require('express-validator');
@@ -13,7 +14,7 @@ exports.theme_list = (req, res, next) => {
       }
       // Successful, so render.
       res.render('theme_list', {
-        title: 'Themes',
+        title: 'Theme List',
         theme_list: list_themes,
       });
     });
@@ -21,7 +22,33 @@ exports.theme_list = (req, res, next) => {
 
 // Display detail page for specifics Themes.
 exports.theme_detail = (req, res, next) => {
-  res.send('No implementation for theme detail GET.');
+  async.parallel(
+    {
+      theme(callback) {
+        Theme.findById(req.params.id).exec(callback);
+      },
+      theme_products(callback) {
+        Product.find({ theme: req.params.id }).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) {
+        return next(err);
+      }
+      if (results.theme == null) {
+        // No results.
+        const err = new Error('Theme not found.');
+        err.status = 404;
+        return next(err);
+      }
+      // Successful, so render.
+      res.render('theme_detail', {
+        title: `${results.theme.name}`,
+        theme: results.theme,
+        theme_products: results.theme_products,
+      });
+    }
+  );
 };
 
 exports.theme_create_get = (req, res, next) => {
