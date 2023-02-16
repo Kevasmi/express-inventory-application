@@ -13,7 +13,7 @@ exports.productinstance_list = (req, res, next) => {
       }
       // Successful, so render.
       res.render('productinstance_list', {
-        title: 'Product Instances',
+        title: 'Inventory',
         list_productinstance,
       });
     });
@@ -35,7 +35,7 @@ exports.productinstance_detail = (req, res, next) => {
       }
       // Successful, so render.
       res.render('productinstance_detail', {
-        title: `Product: ${productinstance.product.title}`,
+        title: `${productinstance.product.name}: ${productinstance._id}`,
         productinstance,
       });
     });
