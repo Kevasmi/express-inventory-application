@@ -200,37 +200,64 @@ function createProductInstances(cb) {
   async.parallel(
     [
       function (callback) {
-        productInstanceCreate(products[0], 'Available', callback);
+        productInstanceCreate(products[0], 'Poor', callback);
       },
       function (callback) {
-        productInstanceCreate(products[1], 'Coming Soon!', callback);
+        productInstanceCreate(products[0], 'Good', callback);
       },
       function (callback) {
-        productInstanceCreate(products[2], 'Available', callback);
+        productInstanceCreate(products[0], 'Like New', callback);
       },
       function (callback) {
-        productInstanceCreate(products[3], 'Available', callback);
+        productInstanceCreate(products[0], 'Poor', callback);
       },
       function (callback) {
-        productInstanceCreate(products[3], 'Out of Stock', callback);
+        productInstanceCreate(products[1], 'Fair', callback);
       },
       function (callback) {
-        productInstanceCreate(products[5], 'Available', callback);
+        productInstanceCreate(products[1], 'Good', callback);
       },
       function (callback) {
-        productInstanceCreate(products[4], 'Available', callback);
+        productInstanceCreate(products[1], 'Poor', callback);
       },
       function (callback) {
-        productInstanceCreate(products[4], 'Out of Stock', callback);
+        productInstanceCreate(products[2], 'Good', callback);
       },
       function (callback) {
-        productInstanceCreate(products[6], 'Out of Stock', callback);
+        productInstanceCreate(products[3], 'Poor', callback);
       },
       function (callback) {
-        productInstanceCreate(products[0], 'Available', callback);
+        productInstanceCreate(products[3], 'Like New', callback);
       },
       function (callback) {
-        productInstanceCreate(products[1], 'Coming Soon!', callback);
+        productInstanceCreate(products[3], 'Good', callback);
+      },
+      function (callback) {
+        productInstanceCreate(products[4], 'Like New', callback);
+      },
+      function (callback) {
+        productInstanceCreate(products[4], 'Good', callback);
+      },
+      function (callback) {
+        productInstanceCreate(products[4], 'Fair', callback);
+      },
+      function (callback) {
+        productInstanceCreate(products[4], 'Poor', callback);
+      },
+      function (callback) {
+        productInstanceCreate(products[5], 'Like New', callback);
+      },
+      function (callback) {
+        productInstanceCreate(products[5], 'Good', callback);
+      },
+      function (callback) {
+        productInstanceCreate(products[5], 'Fair', callback);
+      },
+      function (callback) {
+        productInstanceCreate(products[6], 'Poor', callback);
+      },
+      function (callback) {
+        productInstanceCreate(products[6], 'Like New', callback);
       },
     ],
     // Optional callback
