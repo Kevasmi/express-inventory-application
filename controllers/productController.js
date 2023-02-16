@@ -56,7 +56,7 @@ exports.product_detail = (req, res, next) => {
       product(callback) {
         Product.findById(req.params.id).populate('theme').exec(callback);
       },
-      product_instance(callback) {
+      product_instances(callback) {
         ProductInstance.find({ product: req.params.id }).exec(callback);
       },
     },
@@ -74,7 +74,7 @@ exports.product_detail = (req, res, next) => {
       res.render('product_detail', {
         title: `${results.product.name}`,
         product: results.product,
-        product_instances: results.product_instance,
+        product_instances: results.product_instances,
       });
     }
   );
