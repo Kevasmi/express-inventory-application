@@ -1,0 +1,47 @@
+extends layout 
+
+block content 
+  h1.detail-title= title
+  div.detail-container
+    img.detail-image(src=product.image alt=product.name)
+    div.details
+      h2 $#{product.price}
+      h3.card-piece-count #[strong Piece Count:] #{product.pieceCount}
+      h3.card-theme #[strong Theme:] #{product.theme.name}
+      h3 #[strong Difficulty:] 
+        if product.difficulty=='0 - Beginner'
+          span.text-success #{product.difficulty}
+        else if product.difficulty=='1 - Intermediate'
+          span.text-info #{product.difficulty}
+        else if product.difficulty=='2 - Advanced'
+          span.text-primary #{product.difficulty}
+        else if product.difficulty=='3 - Expert'
+          span.text-warning #{product.difficulty}
+        else if product.difficulty=='4 - Master'
+          span.text-danger #{product.difficulty}
+
+  div(style='margin-left:20px;margin-top:20px')
+    h4 Inventory
+
+    each instance in product_instances
+      hr
+      if instance.status == 'Like New'
+        p.text-success #{instance.status}
+      else if instance.status == 'Good'
+        p.text-info #{instance.status} 
+      else if instance.status == 'Fair'
+        p.text-warning #{instance.status}
+      else 
+        p.text-danger #{instance.status}
+      p #[strong Id:] 
+        a(href=instance.url) #{instance._id}
+
+    else
+      p There is no current inventory of this product.
+      
+  hr
+  p
+    a(href=product.url+'/delete') Delete Product
+  p
+    a(href=product.url+'/update') Update Product
+

@@ -41,3 +41,19 @@ a.nav-link:hover {
   max-width: 500px;
   height: 400px;
 }
+
+.detail-container {
+  display: flex;
+  gap: 8rem;
+}
+
+.detail-image {
+  width: auto;
+  height: 650px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
