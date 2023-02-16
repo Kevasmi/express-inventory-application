@@ -108,6 +108,6 @@ router.post('/theme/:id/update', theme_controller.theme_update_post);
 router.get('/theme/:id', theme_controller.theme_detail);
 
 // GET request for list of all Themes.
-router.get('/theme/', theme_controller.theme_list);
+router.get('/themes/', theme_controller.theme_list);
 
 module.exports = router;
