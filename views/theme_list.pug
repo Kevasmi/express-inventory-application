@@ -1,0 +1,9 @@
+extends layout 
+
+block content 
+  h1= title 
+
+  ul 
+    each theme in theme_list 
+      li 
+        a(href=theme.url) #{theme.name}

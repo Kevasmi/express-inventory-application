@@ -1,0 +1,22 @@
+extends layout
+
+block content
+
+  h1 Theme: #{theme.name}
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Products
+
+    dl
+      each product in theme_products
+        dt
+          a(href=product.url) #{product.name}
+
+      else
+        p This theme has no products.
+    hr
+  p 
+    a(href=theme.url+'/delete') Delete theme
+  p 
+    a(href=theme.url+'/update') Update theme 
