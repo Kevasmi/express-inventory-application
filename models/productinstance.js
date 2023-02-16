@@ -7,8 +7,8 @@ const ProductInstanceSchema = new Schema({
   status: {
     type: String,
     requried: true,
-    enum: ['Available', 'Coming Soon!', 'Out of Stock'],
-    default: 'Coming Soon!',
+    enum: ['Poor', 'Fair', 'Good', 'Like New'],
+    default: 'Like New',
   },
 });
 
