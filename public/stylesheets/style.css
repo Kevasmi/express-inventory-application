@@ -57,3 +57,17 @@ a.nav-link:hover {
   flex-direction: column;
   gap: 5rem;
 }
+
+/* Create Product Form Styling  */
+
+.product-numbers {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#price,
+#pieceCount,
+#setNumber {
+  width: 28em;
+}
