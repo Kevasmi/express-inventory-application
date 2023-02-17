@@ -17,6 +17,8 @@ a.nav-link:hover {
   border-bottom: 4px solid black;
 }
 
+/* Index and Detail Page Styling  */
+
 .product-list {
   list-style: none;
   display: grid;
@@ -56,6 +58,15 @@ a.nav-link:hover {
   display: flex;
   flex-direction: column;
   gap: 5rem;
+}
+
+.button-box {
+  display: flex;
+  gap: 4rem;
+}
+
+.detail-btn > a {
+  color: white;
 }
 
 /* Create Product Form Styling  */

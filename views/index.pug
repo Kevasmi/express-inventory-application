@@ -4,6 +4,7 @@ block content
   h1= title
   p Welcome to Lego!
 
+  - data.products.sort(function(a, b) {let textA = a.theme.name.toUpperCase(); let textB = b.theme.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
   ul.product-list 
     each product in data.products
       li.product-card 

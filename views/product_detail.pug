@@ -1,7 +1,9 @@
 extends layout 
 
-block content 
-  h1.detail-title= title
+block content
+  .d-flex.justify-content-between.p-4
+    h1.detail-title= title
+    h1 ##{product.setNumber}
   div.detail-container
     img.detail-image(src=product.image alt=product.name)
     div.details
@@ -22,7 +24,7 @@ block content
 
   div(style='margin-left:20px;margin-top:20px')
     h4 Inventory
-
+    - product_instances.sort(function(a, b) {let textA = a.status.toUpperCase(); let textB = b.status.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
     each instance in product_instances
       hr
       if instance.status == 'Like New'
@@ -40,8 +42,11 @@ block content
       p There is no current inventory of this product.
       
   hr
-  p
-    a(href=product.url+'/delete') Delete Product
-  p
-    a(href=product.url+'/update') Update Product
+  .button-box
+    p
+      button.btn.btn-primary.detail-btn(type='button') 
+        a(href=product.url+'/delete') Delete Product
+    p
+      button.btn.btn-primary.detail-btn(type='button') 
+        a(href=product.url+'/update') Update Product
 
