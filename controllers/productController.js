@@ -82,7 +82,16 @@ exports.product_detail = (req, res, next) => {
 
 // Display product create form on GET.
 exports.product_create_get = (req, res, next) => {
-  res.render('product_form', { title: 'Create Product.' });
+  // Get all themes, which we can add to our product.
+  Theme.find().exec((err, themes) => {
+    if (err) {
+      return next(err);
+    }
+    res.render('product_form', {
+      title: 'Create Product',
+      themes,
+    });
+  });
 };
 
 // Handle product create on POST.
