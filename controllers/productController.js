@@ -95,9 +95,71 @@ exports.product_create_get = (req, res, next) => {
 };
 
 // Handle product create on POST.
-exports.product_create_post = (req, res, next) => {
-  res.send('No implementation for product create POST yet.');
-};
+exports.product_create_post = [
+  // Validate and sanitize fields.
+  body('name', 'Name must not be empty.').trim().isLength({ min: 1 }).escape(),
+  body('image', 'Image must not be empty.')
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body('price', 'Price must not be empty.')
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body('pieceCount', 'Piece Count must not be empty.')
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body('setNumber', 'Set Number must not be empty.')
+    .trim()
+    .isLength({ min: 1 }),
+  body('theme.*').escape(),
+  body('difficulty').trim().escape(),
+  // Process request after validation and sanitization.
+  (req, res, next) => {
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+
+    // Create a Product object with escaped and trimmed data.
+    const product = new Product({
+      name: req.body.name,
+      image: req.body.image,
+      price: req.body.price,
+      pieceCount: req.body.pieceCount,
+      setNumber: req.body.setNumber,
+      theme: req.body.theme,
+      difficulty: req.body.difficulty,
+    });
+
+    if (!errors.isEmpty()) {
+      // There are errors. Render form again with sanitized values/error messages.
+
+      // Get all themes for form.
+      Theme.find().exec((err, themes) => {
+        if (err) {
+          return next(err);
+        }
+
+        res.render('product_form', {
+          title: 'Create Product',
+          themes,
+          product,
+          errors: errors.array(),
+        });
+      });
+      return;
+    }
+
+    // Data from form is valud. Save product.
+    product.save((err) => {
+      if (err) {
+        return next(err);
+      }
+      // Successful: redirect to new product record.
+      res.redirect(product.url);
+    });
+  },
+];
 
 exports.product_delete_get = (req, res, next) => {
   res.send('No implementation for product delete GET yet.');
