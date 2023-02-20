@@ -53,15 +53,8 @@ exports.theme_detail = (req, res, next) => {
 
 // Display theme create form on GET.
 exports.theme_create_get = (req, res, next) => {
-  // Get all products, which we can add to our productinstance.
-  Product.find(req.params.id).exec((err, products) => {
-    if (err) {
-      return next(err);
-    }
-    res.render('theme_form', {
-      title: 'Create Theme',
-      products,
-    });
+  res.render('theme_form', {
+    title: 'Create Theme',
   });
 };
 
