@@ -78,6 +78,7 @@ exports.theme_create_post = [
       res.render('theme_form', {
         title: 'Create Theme',
         theme,
+        errors: errors.array(),
       });
     }
 
