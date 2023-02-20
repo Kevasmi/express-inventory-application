@@ -59,9 +59,51 @@ exports.productinstance_create_get = (req, res, next) => {
 };
 
 // Handle ProductInstance create on POST.
-exports.productinstance_create_post = (req, res, next) => {
-  res.send('No implementation for productinstance create get.');
-};
+exports.productinstance_create_post = [
+  // Validate and sanitize fields.
+  body('product.*').escape(),
+  body('status').trim().escape(),
+
+  // Process request after validation and sanitization.
+  (req, res, next) => {
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+
+    // Create a ProductInstance object with escaped and trimmed data.
+    const productinstance = new ProductInstance({
+      product: req.body.product,
+      status: req.body.status,
+    });
+
+    if (!errors.isEmpty()) {
+      //There are errors. Render form again with sanitized values/error messages.
+
+      // Get all products for form.
+      Product.find()
+        .populate('theme')
+        .exec((err, products) => {
+          if (err) {
+            return next(err);
+          }
+          res.render('productinstance_form', {
+            title: 'Create Inventory',
+            products,
+            errors: errors.array(),
+          });
+        });
+      return;
+    }
+
+    // Data from form is valid. Save product instance.
+    productinstance.save((err) => {
+      if (err) {
+        return next(err);
+      }
+      // Successful: redirect to new product record.
+      res.redirect(productinstance.url);
+    });
+  },
+];
 
 // Display ProductInstance delete form on GET.
 exports.productinstance_delete_get = (req, res, next) => {
