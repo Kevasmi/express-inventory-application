@@ -1,0 +1,31 @@
+extends layout 
+
+block content 
+  h1= title
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='product') Product:
+      select#product.form-control(type='select', placeholder='Select product' name='product' required='true' value=(undefined===productinstance ? '' : productinstance.product))
+        - products.sort(function(a, b) {let textA = a.theme.name.toUpperCase(); let textB = b.theme.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
+        for product in products
+          if productinstance 
+            option(value=product._id selected=(product._id.toString() ? 'selected' : false)) #{product.name}
+          else 
+            option(value=product._id) #{product.name}
+
+    div.form-group
+      label(for='status') Status: 
+      select#status.form-control(type='select', placeholder='Select status' name='status' required='true' value=(undefined===productinstance ? '' : productinstance.status))
+        if productinstance 
+          option(value=productinstance.status selected) #{productinstance.status}
+        else 
+          option(value='Poor') Poor
+          option(value='Fair') Fair
+          option(value='Good') Good
+          option(value='Like New') Like New
+    button.btn.btn-primary(type='submit') Submit 
+  if errors 
+    ul 
+      for error in errors 
+       li!= error.msg
