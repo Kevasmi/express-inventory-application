@@ -150,7 +150,7 @@ exports.product_create_post = [
       return;
     }
 
-    // Data from form is valud. Save product.
+    // Data from form is valid. Save product.
     product.save((err) => {
       if (err) {
         return next(err);
