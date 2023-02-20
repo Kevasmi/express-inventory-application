@@ -1,4 +1,5 @@
 const ProductInstance = require('../models/productinstance');
+const Product = require('../models/product');
 
 const async = require('async');
 const { body, validationResult } = require('express-validator');
@@ -43,7 +44,18 @@ exports.productinstance_detail = (req, res, next) => {
 
 // Display ProductInstance create form on GET.
 exports.productinstance_create_get = (req, res, next) => {
-  res.render('productinstance_form', { title: 'Create Product Instance ' });
+  // Get all products, which we can add to our product.
+  Product.find()
+    .populate('theme')
+    .exec((err, products) => {
+      if (err) {
+        return next(err);
+      }
+      res.render('productinstance_form', {
+        title: 'Create Inventory',
+        products,
+      });
+    });
 };
 
 // Handle ProductInstance create on POST.
