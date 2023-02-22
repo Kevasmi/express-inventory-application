@@ -4,6 +4,7 @@ block content
   h1= title 
 
   ul 
+  - list_productinstance.sort(function(a, b) {let textA = a.product.name.toUpperCase(); let textB = b.product.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
     each instance in list_productinstance 
       hr
       h3 #{instance.product.name}
