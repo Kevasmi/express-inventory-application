@@ -107,12 +107,34 @@ exports.productinstance_create_post = [
 
 // Display ProductInstance delete form on GET.
 exports.productinstance_delete_get = (req, res, next) => {
-  res.send('No implementation for productinstance delete get.');
+  ProductInstance.findById(req.params.id)
+    .populate('product')
+    .exec((err, productinstance) => {
+      if (err) {
+        return next(err);
+      }
+      if (productinstance == null) {
+        // No results.
+        res.redirect('/catalog/productinstances');
+      }
+      // Successful, so render.
+      res.render('productinstance_delete', {
+        title: 'Delete Inventory',
+        productinstance,
+      });
+    });
 };
 
 // Handle ProductInstance delete on POST.
 exports.productinstance_delete_post = (req, res, next) => {
-  res.send('No implementation for productinstance delete get.');
+  // Assume valid ProductInstance id in field.
+  ProductInstance.findByIdAndRemove(req.body.id, (err) => {
+    if (err) {
+      return next(err);
+    }
+    // Success, so redirect to list of ProductInstance items.
+    res.redirect('/catalog/productinstances');
+  });
 };
 
 // Display ProductInstance update form on GET.
