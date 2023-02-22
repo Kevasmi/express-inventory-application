@@ -18,7 +18,7 @@ block content
       input#pieceCount.form-control(type='number', placeholder='Number of pieces' name='pieceCount' required='true' value=(undefined===product ? '' : product.pieceCount))
       
       label(for='setNumber') Set Number: 
-      input#setNumber.form-control(type='number', placeholder='5 digit Set Number' name='setNumber' required='true' max='99999' value=(undefined===product ? '' : product.setNumber))  
+      input#setNumber.form-control(type='number', placeholder='5 digit Set Number' name='setNumber' required='true' min ='11111' max='99999' value=(undefined===product ? '' : product.setNumber))  
     div.form-group
       label(for='theme') Theme: 
       select#theme.form-control(type='select', placeholder='Select theme' name='theme' required='true' value=(undefined===product ? '' : product.theme))
