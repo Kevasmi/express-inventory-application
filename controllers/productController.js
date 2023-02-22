@@ -162,11 +162,67 @@ exports.product_create_post = [
 ];
 
 exports.product_delete_get = (req, res, next) => {
-  res.send('No implementation for product delete GET yet.');
+  async.parallel(
+    {
+      product(callback) {
+        Product.findById(req.params.id).populate('theme').exec(callback);
+      },
+      product_productinstances(callback) {
+        ProductInstance.find({ product: req.params.id }).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) {
+        return next(err);
+      }
+      if (results.product == null) {
+        // No results.
+        res.redirect('/catalog/products');
+      }
+      res.render('product_delete', {
+        title: 'Delete Product',
+        product: results.product,
+        product_productinstances: results.product_productinstances,
+      });
+    }
+  );
 };
 
 exports.product_delete_post = (req, res, next) => {
-  res.send('No implementation for product delete POST yet.');
+  // Assume the post has valid id (ie no validation/sanitization).
+  async.parallel(
+    {
+      product(callback) {
+        Product.findById(req.params.id).populate('theme').exec(callback);
+      },
+      product_productinstances(callback) {
+        ProductInstance.find({ product: req.params.id }).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) {
+        return next(err);
+      }
+      // Success
+      if (results.product_productinstances.length > 0) {
+        // Product has product instances. Render in the same way as for GET route.
+        res.render('product_delete', {
+          title: 'Delete Product',
+          product: results.product,
+          product_productinstances: results.product_productinstances,
+        });
+        return;
+      }
+      // Product has no product instances. Delete object and redirect to list of products.
+      Product.findByIdAndRemove(req.body.id, (err) => {
+        if (err) {
+          return next(err);
+        }
+        // Success - go to product list.
+        res.redirect('/catalog/products');
+      });
+    }
+  );
 };
 
 exports.product_update_get = (req, res, next) => {

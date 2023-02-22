@@ -1,0 +1,55 @@
+extends layout
+
+block content
+  .d-flex.justify-content-between.p-4
+    h1.detail-title #{title}: #{product.name}
+    h1 ##{product.setNumber}
+  div.detail-container
+    img.detail-image(src=product.image alt=product.name)
+    div.details
+      h2 $#{product.price}
+      h3.card-piece-count #[strong Piece Count:] #{product.pieceCount}
+      h3.card-theme #[strong Theme:] #{product.theme.name}
+      h3 #[strong Difficulty:] 
+        if product.difficulty=='0 - Beginner'
+          span.text-success #{product.difficulty}
+        else if product.difficulty=='1 - Intermediate'
+          span.text-info #{product.difficulty}
+        else if product.difficulty=='2 - Advanced'
+          span.text-primary #{product.difficulty}
+        else if product.difficulty=='3 - Expert'
+          span.text-warning #{product.difficulty}
+        else if product.difficulty=='4 - Master'
+          span.text-danger #{product.difficulty}
+  hr
+ 
+
+  if product_productinstances.length
+
+    p #[strong Delete the following inventory before attempting to delete this product.]
+
+    div(style='margin-left:20px;margin-top:20px')
+
+      h4 Inventory
+      - product_productinstances.sort(function(a, b) {let textA = a.status.toUpperCase(); let textB = b.status.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
+      each instance in product_productinstances
+        hr
+        if instance.status == 'Like New'
+          p.text-success #{instance.status}
+        else if instance.status == 'Good'
+          p.text-info #{instance.status} 
+        else if instance.status == 'Fair'
+          p.text-warning #{instance.status}
+        else 
+          p.text-danger #{instance.status}
+        p #[strong Id:] 
+        a(href=instance.url) #{instance._id}
+
+  else
+    p Do you really want to delete this Book?
+
+    form(method='POST' action='')
+      div.form-group
+        input#productid.form-control(type='hidden',name='id', required='true', value=product._id )
+
+      button.btn.btn-primary(type='submit') Delete
