@@ -1,0 +1,29 @@
+extends layout 
+
+block content 
+  h1 #{title}: #{theme.name}
+
+  if theme_products.length
+
+    p #[strong Delete the following products before attempting to delete this theme.]
+
+    div(style='margin-left:20px;margin-top:20px')
+
+      h4 Products
+
+      dl
+      each product in theme_products
+        dt
+          a(href=product.url) #{product.name}
+        
+
+  else
+    p Do you really want to delete this Theme?
+
+    form(method='POST' action='')
+      div.form-group
+        input#themeid.form-control(type='hidden',name='themeid', required='true', value=theme._id )
+
+      button.btn.btn-primary(type='submit') Delete
+
+

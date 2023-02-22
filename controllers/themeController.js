@@ -94,11 +94,68 @@ exports.theme_create_post = [
 ];
 
 exports.theme_delete_get = (req, res, next) => {
-  res.send('No implementation for theme delete GET.');
+  async.parallel(
+    {
+      theme(callback) {
+        Theme.findById(req.params.id).exec(callback);
+      },
+      theme_products(callback) {
+        Product.find({ theme: req.params.id }).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) {
+        return next(err);
+      }
+      if (results.theme == null) {
+        // No results.
+        res.redirect('/catalog/themes');
+      }
+      // Successful, so render.
+      res.render('theme_delete', {
+        title: `Delete Theme`,
+        theme: results.theme,
+        theme_products: results.theme_products,
+      });
+    }
+  );
 };
 
 exports.theme_delete_post = (req, res, next) => {
-  res.send('No implementation for theme delete POST.');
+  async.parallel(
+    {
+      theme(callback) {
+        Theme.findById(req.params.id).exec(callback);
+      },
+      theme_products(callback) {
+        Product.find({ theme: req.params.id }).exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) {
+        return next(err);
+      }
+      // Success
+      if (results.theme_products > 0) {
+        // Theme has products. Render in the same way as for GET route.
+        res.render('theme_delete', {
+          title: 'Delete Theme',
+          theme: results.theme,
+          theme_products: results.theme_products,
+        });
+        return;
+      } else {
+        // Theme has no products. Delete object and redirect to the list of genres.
+        Theme.findByIdAndRemove(req.body.themeid, (err) => {
+          if (err) {
+            return next(err);
+          }
+          // Successful - so redirect to genre list.
+          res.redirect('/catalog/themes');
+        });
+      }
+    }
+  );
 };
 
 exports.theme_update_get = (req, res, next) => {
