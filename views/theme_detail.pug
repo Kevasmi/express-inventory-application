@@ -16,7 +16,10 @@ block content
       else
         p This theme has no products.
     hr
-  p 
-    a(href=theme.url+'/delete') Delete theme
-  p 
-    a(href=theme.url+'/update') Update theme 
+    .button-box
+      p
+        button.btn.btn-primary.detail-btn(type='button') 
+          a(href=theme.url+'/delete') Delete Product
+      p
+        button.btn.btn-primary.detail-btn(type='button') 
+          a(href=theme.url+'/update') Update Product

@@ -18,7 +18,10 @@ block content
 
 
   hr
-  p
-    a(href=productinstance.url+'/delete') Delete Inventory
-  p
-    a(href=productinstance.url+'/update') Update Inventory
+  .button-box
+    p
+      button.btn.btn-primary.detail-btn(type='button') 
+        a(href=productinstance.url+'/delete') Delete Inventory
+    p
+      button.btn.btn-primary.detail-btn(type='button') 
+        a(href=productinstance.url+'/update') Update Inventory
