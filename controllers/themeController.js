@@ -159,9 +159,53 @@ exports.theme_delete_post = (req, res, next) => {
 };
 
 exports.theme_update_get = (req, res, next) => {
-  res.send('No implementation for theme update GET.');
+  Theme.findById(req.params.id, (err, theme) => {
+    if (err) {
+      return next(err);
+    }
+    if (theme == null) {
+      var err = new Error('Theme not found');
+      err.status = 404;
+      return next(err);
+    }
+    res.render('theme_form', {
+      title: 'Update Theme',
+      theme,
+    });
+  });
 };
 
-exports.theme_update_post = (req, res, next) => {
-  res.send('No implementation for theme update POST.');
-};
+exports.theme_update_post = [
+  // validate and sanitize te name field.
+  body('name', 'Theme name required').trim().isLength({ min: 1 }).escape(),
+
+  // Process request after validation and sanitization.
+  (req, res, next) => {
+    // Extract the validation errors from a request.
+    let errors = validationResult(req);
+
+    // Create a Theme object with escaped/trimmed data and old id.
+    const theme = new Theme({
+      name: req.body.name,
+      _id: req.params.id,
+    });
+
+    if (!errors.isEmpty()) {
+      // There are errors. Render the form again with sanitized values and error messages.
+      res.render('theme_form', {
+        title: 'Update Theme',
+        theme,
+        errors: errors.array(),
+      });
+      return;
+    }
+    // Data from form is valid. Update the record.
+    Theme.findByIdAndUpdate(req.params.id, theme, {}, (err, thetheme) => {
+      if (err) {
+        return next(err);
+      }
+      // Successful - redirect to theme detail page.
+      res.redirect(thetheme.url);
+    });
+  },
+];
