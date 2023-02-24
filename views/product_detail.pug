@@ -9,7 +9,8 @@ block content
     div.details
       h2 $#{product.price}
       h3.card-piece-count #[strong Piece Count:] #{product.pieceCount}
-      h3.card-theme #[strong Theme:] #{product.theme.name}
+      h3.card-theme #[strong Theme:] 
+        a(href=product.theme.url) #{product.theme.name}
       h3 #[strong Difficulty:] 
         if product.difficulty=='0 - Beginner'
           span.text-success #{product.difficulty}
