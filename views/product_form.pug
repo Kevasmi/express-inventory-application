@@ -21,24 +21,20 @@ block content
       input#setNumber.form-control(type='number', placeholder='5 digit Set Number' name='setNumber' required='true' min ='11111' max='99999' value=(undefined===product ? '' : product.setNumber))  
     div.form-group
       label(for='theme') Theme: 
-      select#theme.form-control(type='select', placeholder='Select theme' name='theme' required='true' value=(undefined===product ? '' : product.theme))
+      select#theme.form-control(type='select', placeholder='Select theme' name='theme' required='true')
         - themes.sort(function(a, b) {let textA = a.name.toUpperCase(); let textB = b.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
         for theme in themes 
-          if product 
-            option(value=theme._id selected=(theme._id.toString() ? 'selected' : false) ) #{theme.name}
-          else 
-            option(value=theme._id) #{theme.name}
+          option(value=theme._id, selected=(selected_theme==theme._id.toString() ? 'selected' : false) ) #{theme.name}
+
     div.form-group
       label(for='difficulty') Difficulty: 
       select#difficulty.form-control(type='select', placeholder='Select difficulty' name='difficulty' required='true' value=(undefined===product ? '' : product.difficulty))
-        if product
-          option(value=product.difficulty selected) #{product.difficulty}
-        else  
-          option(value='0 - Beginner') 0 - Beginner
-          option(value='1 - Intermediate') 1 - Intermediate
-          option(value='2 - Advanced') 2 - Advanced
-          option(value='3 - Expert') 3 - Expert
-          option(value='4 - Master') 4 - Master                      
+          option(value='0 - Beginner' selected=(undefined===product || product.difficulty!='0 - Beginner' ? false:'selected')) 0 - Beginner
+          option(value='1 - Intermediate' selected=(undefined===product || product.difficulty!='1 - Intermediate' ? false:'selected')) 1 - Intermediate
+          option(value='2 - Advanced' selected=(undefined===product || product.difficulty!='2 - Advanced' ? false:'selected')) 2 - Advanced
+          option(value='3 - Expert' selected=(undefined===product || product.difficulty!='3 - Expert' ? false:'selected')) 3 - Expert
+          option(value='4 - Master' selected=(undefined===product || product.difficulty!='4 - Master' ? false:'selected')) 4 - Master
+
     button.btn.btn-primary(type='submit') Submit 
 
   if errors 
