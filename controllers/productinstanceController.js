@@ -139,10 +139,86 @@ exports.productinstance_delete_post = (req, res, next) => {
 
 // Display ProductInstance update form on GET.
 exports.productinstance_update_get = (req, res, next) => {
-  res.send('No implementation for productinstance update get.');
+  async.parallel(
+    {
+      productinstance(callback) {
+        ProductInstance.findById(req.params.id)
+          .populate('product')
+          .exec(callback);
+      },
+      products(callback) {
+        Product.find().populate('theme').exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) {
+        return next(err);
+      }
+      if (results.productinstance == null) {
+        // No results.
+        let err = new Error('Product instance not found');
+        err.status = 404;
+        return next(err);
+      }
+      res.render('productinstance_form', {
+        title: 'Update Inventory',
+        productinstance: results.productinstance,
+        products: results.products,
+        selected_product: results.productinstance.product._id,
+      });
+    }
+  );
 };
 
 // Handle ProductInstance update on POST.
-exports.productinstance_update_post = (req, res, next) => {
-  res.send('No implementation for productinstance update post.');
-};
+exports.productinstance_update_post = [
+  // Validate and sanitize fields.
+  body('product.*').escape(),
+  body('status').trim().escape(),
+
+  // process request after validation and sanitization.
+  (req, res, next) => {
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+
+    // Create a ProductInstance object with escaped/trimmed data and current id.
+    let productinstance = new ProductInstance({
+      product: req.body.product,
+      status: req.body.status,
+      _id: req.params.id,
+    });
+
+    if (!errors.isEmpty()) {
+      // There are errors so render the form again, passing sanitized values and errors.
+      Product.find()
+        .populate('theme')
+        .exec((err, products) => {
+          if (err) {
+            return next(err);
+          }
+          // Successful, so render.
+          res.render('productinstance_form', {
+            title: 'Update Inventory',
+            productinstance,
+            products,
+            errors: errors.array(),
+          });
+        });
+      return;
+    } else {
+      // Data from form is valid.
+      ProductInstance.findByIdAndUpdate(
+        req.params.id,
+        productinstance,
+        {},
+        (err, theproductinstance) => {
+          if (err) {
+            return next(err);
+          }
+          // Successful - redirect to detail page.
+          res.redirect(theproductinstance.url);
+        }
+      );
+    }
+  },
+];
