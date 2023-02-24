@@ -226,9 +226,95 @@ exports.product_delete_post = (req, res, next) => {
 };
 
 exports.product_update_get = (req, res, next) => {
-  res.send('No implementation for product update GET yet.');
+  async.parallel(
+    {
+      product(callback) {
+        Product.findById(req.params.id).populate('theme').exec(callback);
+      },
+      themes(callback) {
+        Theme.find().exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) {
+        return next(err);
+      }
+      if (results.product == null) {
+        // No results.
+        const err = new Error('Product not found');
+        err.status = 404;
+        return next(err);
+      }
+      // Success.
+      res.render('product_form', {
+        title: 'Update Product',
+        product: results.product,
+        themes: results.themes,
+        selected_theme: results.product.theme._id,
+      });
+    }
+  );
 };
 
-exports.product_update_post = (req, res, next) => {
-  res.send('No implementation for product update POST yet.');
-};
+exports.product_update_post = [
+  // Validate and sanitize fields.
+  body('name', 'Name must not be empty.').trim().isLength({ min: 1 }).escape(),
+  body('image', 'Image must not be empty.').trim().isLength({ min: 1 }),
+  body('price', 'Price must not be empty.')
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body('pieceCount', 'Piece Count must not be empty.')
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body('setNumber', 'Set Number must not be empty.')
+    .trim()
+    .isLength({ min: 1 }),
+  body('theme.*').escape(),
+  body('difficulty').trim().escape(),
+  // Process request after validation and sanitization.
+  (req, res, next) => {
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+
+    // Create a Product object with escaped/trimmed data and old id.
+    const product = new Product({
+      name: req.body.name,
+      image: req.body.image,
+      price: req.body.price,
+      pieceCount: req.body.pieceCount,
+      setNumber: req.body.setNumber,
+      theme: req.body.theme,
+      difficulty: req.body.difficulty,
+      _id: req.params.id,
+    });
+
+    if (!errors.isEmpty()) {
+      // There are errors. Render form again with sanitized values/error messages.
+      //Get all Themes for form.
+      Theme.find().exec((err, themes) => {
+        if (err) {
+          return next(err);
+        }
+        res.render('product_form', {
+          title: 'Update Product',
+          themes,
+          product,
+          errors: errors.array(),
+        });
+      });
+      return;
+    }
+
+    // Data from form is valid. Update the record.
+    Product.findByIdAndUpdate(req.params.id, product, {}, (err, theproduct) => {
+      if (err) {
+        return next(err);
+      }
+
+      // Successful: redirect to product detail page.
+      res.redirect(theproduct.url);
+    });
+  },
+];
