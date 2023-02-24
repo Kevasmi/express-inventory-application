@@ -9,21 +9,16 @@ block content
       select#product.form-control(type='select', placeholder='Select product' name='product' required='true' value=(undefined===productinstance ? '' : productinstance.product))
         - products.sort(function(a, b) {let textA = a.theme.name.toUpperCase(); let textB = b.theme.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
         for product in products
-          if productinstance 
-            option(value=product._id selected=(product._id.toString() ? 'selected' : false)) #{product.name}
-          else 
-            option(value=product._id) #{product.name}
+          option(value=product._id, selected=(selected_product==product._id.toString() ? 'selected' : false) ) #{product.name}
 
     div.form-group
       label(for='status') Status: 
-      select#status.form-control(type='select', placeholder='Select status' name='status' required='true' value=(undefined===productinstance ? '' : productinstance.status))
-        if productinstance 
-          option(value=productinstance.status selected) #{productinstance.status}
-        else 
-          option(value='Poor') Poor
-          option(value='Fair') Fair
-          option(value='Good') Good
-          option(value='Like New') Like New
+      select#status.form-control(type='select', placeholder='Select status' name='status' required='true')
+          option(value='Poor' selected=(undefined===productinstance || productinstance.status!='Poor' ? false:'selected')) Poor
+          option(value='Fair' selected=(undefined===productinstance || productinstance.status!='Fair' ? false:'selected')) Fair
+          option(value='Good' selected=(undefined===productinstance || productinstance.status!='Good' ? false:'selected')) Good
+          option(value='Like New' selected=(undefined===productinstance || productinstance.status!='Like New' ? false:'selected')) Like New
+
     button.btn.btn-primary(type='submit') Submit 
   if errors 
     ul 
