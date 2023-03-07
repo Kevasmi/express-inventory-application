@@ -4,7 +4,6 @@ const Theme = require('../models/theme');
 
 const async = require('async');
 const { body, validationResult } = require('express-validator');
-const { populate } = require('../models/product');
 
 exports.index = (req, res, next) => {
   async.parallel(
