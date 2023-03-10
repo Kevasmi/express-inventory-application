@@ -1,4 +1,27 @@
 extends layout
 
 block content 
-  h1= title
+  .container.py-5.h-100
+    .row.d-flex.justify-content-center.align-items-center.h-100
+      .col.col-xl-10
+        .card(style='border-radius: 1rem;')
+          .row.g-0
+            .col-md-6.col-lg-5.d-none.d-md-block
+              img.img-fluid(src='https://media.istockphoto.com/id/458282763/photo/lego-building-bricks-and-interlocking-blocks.jpg?s=612x612&w=0&k=20&c=lgGbq4WrnrsID4gcE0QYRiyG2lVezUJJCCh_4vgNXUU=' alt='login form' style='border-radius: 1rem 0 0 1rem;')
+            .col-md-6.col-lg-7.d-flex.align-items-center
+              .card-body.p-4.p-lg-5.text-black
+                form
+                  .d-flex.align-items-center.mb-3.pb-1
+                    i.fas.fa-cubes.fa-2x.me-3(style='color: #ff6219;')
+                  h5.fw-normal.mb-3.pb-3(style='letter-spacing: 1px;') Sign into your account
+                  .form-outline.mb-4
+                    input#form2Example17.form-control.form-control-lg(type='email')
+                    label.form-label(for='form2Example17') Email address
+                  .form-outline.mb-4
+                    input#form2Example27.form-control.form-control-lg(type='password')
+                    label.form-label(for='form2Example27') Password
+                  .pt-1.mb-4
+                    button.btn.btn-dark.btn-lg.btn-block(type='button') Login
+                  p.mb-5.pb-lg-2(style='color: #393f81;')
+                    | Don&apos;t have an account? 
+                    a(href='/users/sign-up' style='color: #1E90FF;') Register here
