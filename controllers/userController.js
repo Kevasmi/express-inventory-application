@@ -1,8 +1,7 @@
+const User = require('../models/user');
+const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-const { body, validationResult } = require('express-validator');
-
-const User = require('../models/user');
 
 exports.sign_up_get = (req, res, next) => {
   res.render('sign_up_form', {
@@ -43,17 +42,16 @@ exports.sign_up_post = [
 ];
 
 exports.log_in_get = (req, res, next) => {
-  res.render('log_in', {
-    title: 'Log-In',
-  });
+  // If user is already logged in, redirect them to the homepage
+  if (res.locals.currentUser) return res.redirect('/');
+  res.render('log_in');
 };
 
-exports.log_in_post = (req, res, next) => {
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/',
-  });
-};
+exports.log_in_post = passport.authenticate('local', {
+  successRedirect: '/catalog',
+  failureRedirect: '/users/log-in',
+  failureMessage: true,
+});
 
 exports.log_out = (req, res, next) => {
   req.logout(function (err) {
