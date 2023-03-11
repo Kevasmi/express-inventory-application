@@ -82,3 +82,22 @@ a.nav-link:hover {
 #setNumber {
   width: 28em;
 }
+
+/* Sign-Up Form Styling */
+
+input[type='radio'] {
+  border: 0px;
+  width: 70%;
+  height: 1em;
+}
+
+input[type='radio']:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.radio-img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
