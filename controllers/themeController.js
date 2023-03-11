@@ -16,6 +16,7 @@ exports.theme_list = (req, res, next) => {
       res.render('theme_list', {
         title: 'Theme List',
         theme_list: list_themes,
+        user: res.locals.currentUser,
       });
     });
 };
@@ -46,6 +47,7 @@ exports.theme_detail = (req, res, next) => {
         title: `${results.theme.name}`,
         theme: results.theme,
         theme_products: results.theme_products,
+        user: res.locals.currentUser,
       });
     }
   );
@@ -55,6 +57,7 @@ exports.theme_detail = (req, res, next) => {
 exports.theme_create_get = (req, res, next) => {
   res.render('theme_form', {
     title: 'Create Theme',
+    user: res.locals.currentUser,
   });
 };
 
@@ -78,6 +81,7 @@ exports.theme_create_post = [
       res.render('theme_form', {
         title: 'Create Theme',
         theme,
+        user: res.locals.currentUser,
         errors: errors.array(),
       });
     }
@@ -116,6 +120,7 @@ exports.theme_delete_get = (req, res, next) => {
         title: `Delete Theme`,
         theme: results.theme,
         theme_products: results.theme_products,
+        user: res.locals.currentUser,
       });
     }
   );
@@ -142,6 +147,7 @@ exports.theme_delete_post = (req, res, next) => {
           title: 'Delete Theme',
           theme: results.theme,
           theme_products: results.theme_products,
+          user: res.locals.currentUser,
         });
         return;
       } else {
@@ -171,6 +177,7 @@ exports.theme_update_get = (req, res, next) => {
     res.render('theme_form', {
       title: 'Update Theme',
       theme,
+      user: res.locals.currentUser,
     });
   });
 };
@@ -195,6 +202,7 @@ exports.theme_update_post = [
       res.render('theme_form', {
         title: 'Update Theme',
         theme,
+        user: res.locals.currentUser,
         errors: errors.array(),
       });
       return;

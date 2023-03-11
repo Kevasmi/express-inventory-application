@@ -25,6 +25,7 @@ exports.index = (req, res, next) => {
       res.render('index', {
         title: 'Check it out!',
         data: results,
+        user: res.locals.currentUser,
         error: err,
       });
     }
@@ -44,6 +45,7 @@ exports.product_list = (req, res, next) => {
       res.render('product_list', {
         title: 'Product List',
         list_products,
+        user: res.locals.currentUser,
       });
     });
 };
@@ -74,6 +76,7 @@ exports.product_detail = (req, res, next) => {
         title: `${results.product.name}`,
         product: results.product,
         product_instances: results.product_instances,
+        user: res.locals.currentUser,
       });
     }
   );
@@ -89,6 +92,7 @@ exports.product_create_get = (req, res, next) => {
     res.render('product_form', {
       title: 'Create Product',
       themes,
+      user: res.locals.currentUser,
     });
   });
 };
@@ -143,6 +147,7 @@ exports.product_create_post = [
           title: 'Create Product',
           themes,
           product,
+          user: res.locals.currentUser,
           errors: errors.array(),
         });
       });
@@ -182,6 +187,7 @@ exports.product_delete_get = (req, res, next) => {
         title: 'Delete Product',
         product: results.product,
         product_productinstances: results.product_productinstances,
+        user: res.locals.currentUser,
       });
     }
   );
@@ -209,6 +215,7 @@ exports.product_delete_post = (req, res, next) => {
           title: 'Delete Product',
           product: results.product,
           product_productinstances: results.product_productinstances,
+          user: res.locals.currentUser,
         });
         return;
       }
@@ -250,6 +257,7 @@ exports.product_update_get = (req, res, next) => {
         product: results.product,
         themes: results.themes,
         selected_theme: results.product.theme._id,
+        user: res.locals.currentUser,
       });
     }
   );
@@ -300,6 +308,8 @@ exports.product_update_post = [
           title: 'Update Product',
           themes,
           product,
+          user: res.locals.currentUser,
+
           errors: errors.array(),
         });
       });

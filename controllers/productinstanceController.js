@@ -16,6 +16,7 @@ exports.productinstance_list = (req, res, next) => {
       res.render('productinstance_list', {
         title: 'Inventory',
         list_productinstance,
+        user: res.locals.currentUser,
       });
     });
 };
@@ -38,6 +39,7 @@ exports.productinstance_detail = (req, res, next) => {
       res.render('productinstance_detail', {
         title: `${productinstance.product.name}: ${productinstance._id}`,
         productinstance,
+        user: res.locals.currentUser,
       });
     });
 };
@@ -54,6 +56,7 @@ exports.productinstance_create_get = (req, res, next) => {
       res.render('productinstance_form', {
         title: 'Create Inventory',
         products,
+        user: res.locals.currentUser,
       });
     });
 };
@@ -88,6 +91,7 @@ exports.productinstance_create_post = [
           res.render('productinstance_form', {
             title: 'Create Inventory',
             products,
+            user: res.locals.currentUser,
             errors: errors.array(),
           });
         });
@@ -121,6 +125,7 @@ exports.productinstance_delete_get = (req, res, next) => {
       res.render('productinstance_delete', {
         title: 'Delete Inventory',
         productinstance,
+        user: res.locals.currentUser,
       });
     });
 };
@@ -165,6 +170,7 @@ exports.productinstance_update_get = (req, res, next) => {
         productinstance: results.productinstance,
         products: results.products,
         selected_product: results.productinstance.product._id,
+        user: res.locals.currentUser,
       });
     }
   );
@@ -201,6 +207,7 @@ exports.productinstance_update_post = [
             title: 'Update Inventory',
             productinstance,
             products,
+            user: res.locals.currentUser,
             errors: errors.array(),
           });
         });
