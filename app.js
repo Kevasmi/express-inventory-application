@@ -9,6 +9,7 @@ const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user');
+const my_secret = process.env.AUTH_SECRET;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -19,7 +20,7 @@ var app = express();
 // Set up mongoose connection
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
-const mongoDB = process.env.SECRET_KEY;
+const mongoDB = process.env.URI_KEY;
 
 main().catch((err) => console.log(err));
 async function main() {
@@ -31,7 +32,20 @@ async function main() {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(
+  session({
+    secret: my_secret,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
 passport.use(
   new LocalStrategy((username, password, done) => {
     User.findOne({ username: username }, (err, user) => {
@@ -47,6 +61,7 @@ passport.use(
     });
   })
 );
+
 passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
@@ -56,14 +71,14 @@ passport.deserializeUser(function (id, done) {
     done(err, user);
   });
 });
+
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
+
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/catalog', catalogRouter);
