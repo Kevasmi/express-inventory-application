@@ -38,14 +38,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(
-  session({
-    secret: my_secret,
-    resave: false,
-    saveUninitialized: true,
-  })
-);
-
 passport.use(
   new LocalStrategy((username, password, done) => {
     User.findOne({ username: username }, (err, user) => {
@@ -72,13 +64,21 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
+app.use(
+  session({
+    secret: my_secret,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next();
 });
 
-app.use(passport.initialize());
-app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/catalog', catalogRouter);
