@@ -10,9 +10,20 @@ block content
     div.form-group 
       label(for='password') Password: 
       input#password.form-control(type='text', placeholder='Enter desired password' name='password' required='true')
-    div.form-group
-      label(for='avatar') Avatar: 
-      input#avatar.form-control(type='text', placeholder='' name='avatar')
+    div.form-group.d-flex.justify-content-center.align-items-center
+      p Avatar: 
+      input#obi-wan.form-control(type='radio', name='avatar' value='https://i.kym-cdn.com/photos/images/newsfeed/001/701/632/e9f.jpg' required='true')
+      label(for='obi-wan')
+        img.radio-img(src='https://i.kym-cdn.com/photos/images/newsfeed/001/701/632/e9f.jpg')
+      input#cody.form-control(type='radio', name='avatar' value='https://i.kym-cdn.com/photos/images/newsfeed/001/701/583/e7f.jpg')
+      label(for='cody')
+        img.radio-img(src='https://i.kym-cdn.com/photos/images/newsfeed/001/701/583/e7f.jpg')
+      input#mace-windu.form-control(type='radio', name='avatar' value='https://i.kym-cdn.com/photos/images/newsfeed/001/701/630/7bf.jpg')
+      label(for='mace-windu')
+        img.radio-img(src='https://i.kym-cdn.com/photos/images/newsfeed/001/701/630/7bf.jpg')
+      input#princess-leia.form-control(type='radio', name='avatar' value='https://i.kym-cdn.com/photos/images/newsfeed/001/701/643/a9d.jpg')
+      label(for='princess-leia')
+        img.radio-img(src='https://i.kym-cdn.com/photos/images/newsfeed/001/701/643/a9d.jpg')
     div.form-group.form-check.form-switch
       input#flexSwitchCheckDefault.form-check-input(type='checkbox' name='admin' value='true')
       label.form-check-label(for='flexSwitchCheckDefault') Is this an admin account?
