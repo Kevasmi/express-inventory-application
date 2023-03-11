@@ -9,6 +9,7 @@ html(lang='en')
     script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js", integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV", crossorigin="anonymous")
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    //- - let user = {username: 'Kev', passoword: 'test', admin: true, avatar: 'https://i.kym-cdn.com/photos/images/newsfeed/001/701/632/e9f.jpg'}
     nav.navbar.navbar-expand-lg.bg-body-tertiary(style='background-color: yellow')
       .container-fluid
         a.navbar-brand(href='/catalog')
@@ -23,16 +24,19 @@ html(lang='en')
               a.nav-link(href='/catalog/themes') Themes
             li.nav-item(style='margin-right: 2rem')
               a.nav-link(href='/catalog/productinstances') Inventory
-            li.nav-item
-              a.nav-link(href='/catalog/product/create') Create Product
-            li.nav-item
-              a.nav-link(href='/catalog/theme/create') Create Theme
-            li.nav-item
-              a.nav-link(href='/catalog/productinstance/create') Create Inventory
-          if user
-            ul.navbar-nav.ml-auto
+            if user && user.admin
               li.nav-item
-                img()
+                a.nav-link(href='/catalog/product/create') Create Product
+              li.nav-item
+                a.nav-link(href='/catalog/theme/create') Create Theme
+              li.nav-item
+                a.nav-link(href='/catalog/productinstance/create') Create Inventory
+          if user
+            ul.navbar-nav.ml-auto.d-flex.justify-content-center.align-items-center
+              li.nav-item.m-3
+                img.rounded-circle.mx-auto.d-block(src=user.avatar width='60px' height='60px')
+              li.nav-item.m-3
+                span.h4 Welcome, #{user.username}!
               li.nav-item
                 a.nav-link(href='/users/sign-out') Sign Out
           else              
