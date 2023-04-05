@@ -8,6 +8,8 @@ The particular back-end stack for the is object is Node, Express, and MongoDB. T
 
 The app itself is a inventory management application for a Lego resell website. It keeps track of the inventory, allowing admins to create, delete, update, or view items in inventory. There are also normal users who can only view the items on offer.
 
+## MVC
+
 ### Models
 
 The product, product instance, theme, and user are the four object models of the database.
@@ -17,7 +19,7 @@ Here is an ERD that displays the model attributes and relationships:
 
 The user object is used in authentication and allowing access to admin privileges for certain users. However, as there is no system currently in place for placing actual orders of items, the user object currently has no shared relationships with any of the other models. 
 
-## Views
+### Views
 
 There are a multitude of views used in the project. However, they follow a specific pattern that relates them to the route and CRUD action performed on them. 
 
@@ -31,4 +33,4 @@ Snippet of view naming schema:
 
 ![Inventory Views Snippet](https://user-images.githubusercontent.com/96889143/229982410-d96ba621-a3a2-47a7-80a0-fab85e534426.png)
 
-## Controllers
+### Controllers
