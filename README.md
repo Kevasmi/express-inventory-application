@@ -27,4 +27,8 @@ The user object is associated with the sign_up_form (POST) and log_in (GET) view
 
 The rest of the views are used for various main pages or headers. The layout view is responsible for the persistent header on every view using the PUG extends functionality. The index acts as the homepage of the project, displaying products in a card grid.
 
+Snippet of view naming schema:
+
+![Inventory Views Snippet](https://user-images.githubusercontent.com/96889143/229982410-d96ba621-a3a2-47a7-80a0-fab85e534426.png)
+
 ## Controllers
