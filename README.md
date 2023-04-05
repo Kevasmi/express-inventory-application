@@ -8,7 +8,7 @@ The particular back-end stack for the is object is Node, Express, and MongoDB. T
 
 The app itself is a inventory management application for a Lego resell website. It keeps track of the inventory, allowing admins to create, delete, update, or view items in inventory. There are also normal users who can only view the items on offer.
 
-## Models
+### Models
 
 The product, product instance, theme, and user are the four object models of the database.
 
