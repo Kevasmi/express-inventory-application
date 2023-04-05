@@ -8,8 +8,12 @@ The particular back-end stack for the is object is Node, Express, and MongoDB. T
 
 The app itself is a inventory management application for a Lego resell website. It keeps track of the inventory, allowing admins to create, delete, update, or view items in inventory. There are also normal users who can only view the items on offer.
 
-The product, product instance, and theme are the three object models of the database.
+## Models
+
+The product, product instance, theme, and user are the four object models of the database.
 
 Here is an ERD to display model attributes and relationships:
-![Brick Barn ERD](https://user-images.githubusercontent.com/96889143/229979355-6614356c-379e-4a62-9e86-06d0d52a5a08.png)
+![Brick Barn ERD](https://user-images.githubusercontent.com/96889143/229981236-353eec0e-92f2-4421-95d6-470914587aa8.png)
+
+There is also a user object used in authentication and allowing access to admin privileges for certain users. However, as there is no system currently in place for placing actual orders of items, the user object currently has no shared relationships with any of the other models. 
 
