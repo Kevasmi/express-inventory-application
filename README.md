@@ -23,7 +23,7 @@ The user object is used in authentication and allowing access to admin privilege
 
 There are a multitude of views used in the project. However, they follow a specific pattern that relates them to the route and CRUD action performed on them. 
 
-So for ever model object, excluding the user object, there is a detail view (GET), delete view (DELETE), update view (UPDATE), and creation view (POST). 
+So for every model object, excluding the user object, there is a detail view (GET), delete view (DELETE), update view (UPDATE), and creation view (POST). 
 
 The user object is associated with the sign_up_form (POST) and log_in (GET) views.
 
