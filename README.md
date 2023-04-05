@@ -2,7 +2,7 @@
 
 ## Intro
 
-This express inventory application is a project that allowed me to test my skills with server creation, route creation, authorization implementation, database management, and my ability to work on MVC projects.
+This express inventory application is a project that allowed me to test my skills with server creation, route creation, authorization implementation, database management, and my ability to work with MVC approach to application creation.
 
 The particular back-end stack for the is object is Node, Express, and MongoDB. The view engine is PUG. A variety of modules such as dotenv, passport, mongoose, and others were used as various middleware/encryption tools. Much of the project also incorporates Bootstrap for styling.
 
