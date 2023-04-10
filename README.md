@@ -46,7 +46,7 @@ The controllers managed all of the routes for the website.
 
 Each route first fetches the necessary data from the database using **mongoose** before moving on with any other necessary operations, dependent upon what CRUD operation was being fulfilled.
 
-For routes with multiple asynchronous database operations needed, I used the **async** module's **parrallel** function.
+For routes with multiple asynchronous database operations needed, I used the **async** module's **parallel** function.
 
 Each route used guard clauses to make sure mongoose was finding valid data, otherwise it would call upon the error handler and return a 404 status. 
 
@@ -78,7 +78,7 @@ On UPDATE routes, when rendering the form, the GET route finds the specific item
 
 ![Invt_Mngt_UPDATE_View_Example](https://user-images.githubusercontent.com/96889143/230827124-1b8cd89a-84d5-438f-b906-9f51beff13ff.png)
 
-On the actual UPDATE route, the function runs exactly as a POST route. Using **mongoose**, I am able to do UPDATE and DELETE operations using POST's.
+On the actual UPDATE route, the function runs exactly as a POST route. Using **mongoose**, I am able to do UPDATE and DELETE operations using POSTs.
 
  ![Int_Mngt_UPDATE_Example](https://user-images.githubusercontent.com/96889143/230825916-34ecaf6b-c2ed-4413-984d-b812f7275a1a.png)
  
