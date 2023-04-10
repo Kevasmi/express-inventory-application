@@ -15,7 +15,7 @@ The app itself is a inventory management application for a Lego resell website. 
 The product, product instance, theme, and user are the four object models of the database.
 
 Here is an ERD that displays the model attributes and relationships:
-![Brick Barn ERD](https://user-images.githubusercontent.com/96889143/230843793-6f64fca9-efd3-4808-9be4-89a35cab1fa5.png)
+![Brick Barn ERD](https://user-images.githubusercontent.com/96889143/230844035-b221e132-024f-490b-8297-bba14f8ab3bb.png)
 
 The user object is used in authentication and allowing access to admin privileges for certain users. However, as there is no system currently in place for placing actual orders of items, the user object currently has no shared relationships with any of the other models. 
 
