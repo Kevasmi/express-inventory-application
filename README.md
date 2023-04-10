@@ -31,7 +31,7 @@ The user object is associated with the sign_up_form (POST) and log_in (GET) view
 ![Inv_Mngt_Sign_Up_Page](https://user-images.githubusercontent.com/96889143/230823097-c8b12686-a57f-46d0-9fda-662a599bef8e.png)
 
 **Log-In Page**
-![Inv_Mngt_Sign_Up_Page](https://user-images.githubusercontent.com/96889143/230823247-7a5889df-f13e-409c-9086-e7e8ab43e3b5.png)
+![Inv_Mngt_Log_In](https://user-images.githubusercontent.com/96889143/230823281-3f1f1a62-cf54-4346-b3d5-45d72af92d67.png)
 
 
 The rest of the views are used for various main pages or headers. The layout view is responsible for the persistent header on every view using the PUG extends functionality. The index acts as the homepage of the project, displaying products in a card grid.
