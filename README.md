@@ -27,6 +27,13 @@ So for every model object, excluding the user object, there is a detail view (GE
 
 The user object is associated with the sign_up_form (POST) and log_in (GET) views.
 
+**Sign-Up Form**
+![Inv_Mngt_Sign_Up_Page](https://user-images.githubusercontent.com/96889143/230823097-c8b12686-a57f-46d0-9fda-662a599bef8e.png)
+
+**Log-In Page**
+![Inv_Mngt_Sign_Up_Page](https://user-images.githubusercontent.com/96889143/230823247-7a5889df-f13e-409c-9086-e7e8ab43e3b5.png)
+
+
 The rest of the views are used for various main pages or headers. The layout view is responsible for the persistent header on every view using the PUG extends functionality. The index acts as the homepage of the project, displaying products in a card grid.
 
 Snippet of view naming schema:
