@@ -41,3 +41,32 @@ Snippet of view naming schema:
 ![Inventory Views Snippet](https://user-images.githubusercontent.com/96889143/229982410-d96ba621-a3a2-47a7-80a0-fab85e534426.png)
 
 ### Controllers
+
+The controllers managed all of the routes for the website. 
+
+Each route first fetches the necessary data from the database using **mongoose** before moving on with any other necessary operations, dependent upon what CRUD operation was being fulfilled.
+
+For routes with multiple asynchronous database operations needed, I used the **async** module's **parrallel** function.
+
+Each route used guard clauses to make sure mongoose was finding valid data, otherwise it would call upon the error handler and return a 404 status. 
+
+**GET**
+On GET routes, if no errors, it chooses to appropriate view and renders the page with the valid fetched data.
+![Int_Mngt_GET_Example](https://user-images.githubusercontent.com/96889143/230824972-b3c973f6-4052-42fc-bdd5-b904bf7616a1.png)
+
+
+**POST**
+On POST routes, it firsts validates and sanitizes the data entered in the fields. 
+![Int_Mngt_POST_Sanitize_Example](https://user-images.githubusercontent.com/96889143/230825053-5bfa6e36-2573-4028-976b-378d18d0542a.png)
+
+
+If any errors are found, it puts the results into a new variable. 
+
+It creates a new object based off the model with the entered data and checks against whether the error variable empty or not. If not, it will re-render the form page with the previously entered data and appropriate error messages (to be added). 
+![Inv_Mngt_POST_Example](https://user-images.githubusercontent.com/96889143/230824630-f29bb6f1-9169-4259-a369-991e68c8a0a4.png)
+
+
+If no errors are found, it will save the new item into the database and redirect to the detail or category overview page.
+![Int_Mngt_POST_Redirect_Example](https://user-images.githubusercontent.com/96889143/230824745-98a53a27-93a2-45b2-a56b-27ffc6c9cb60.png)
+
+**UPDATE**
