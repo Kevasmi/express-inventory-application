@@ -74,4 +74,26 @@ If no errors are found, it will save the new item into the database and redirect
 ![Int_Mngt_POST_Redirect_Example](https://user-images.githubusercontent.com/96889143/230824745-98a53a27-93a2-45b2-a56b-27ffc6c9cb60.png)
 
 **UPDATE**  
-Hello
+On UPDATE routes, when rendering the form, the GET route finds the specific items needed from the database using the id stored in the url params. This renders the view form with inputs pre-filled with the same data.
+
+![Invt_Mngt_UPDATE_View_Example](https://user-images.githubusercontent.com/96889143/230827124-1b8cd89a-84d5-438f-b906-9f51beff13ff.png)
+
+On the actual UPDATE route, the function runs exactly as a POST route. Using **mongoose**, I am able to do UPDATE and DELETE operations using POST's.
+
+ ![Int_Mngt_UPDATE_Example](https://user-images.githubusercontent.com/96889143/230825916-34ecaf6b-c2ed-4413-984d-b812f7275a1a.png)
+ 
+ **DELETE**  
+ On the DELETE routes, much the same as the UPDATE routes, the actual operation run is  a POST using the **mongoose** module. On the DELETE GET, however, the view will not render the delete button until all dependent database items are removed first. 
+ 
+ This means you can't delete a theme until all products associated with it are deleted first, and the same for products and product instances.
+ 
+![Invt_Mngt_DELETE_View_Example](https://user-images.githubusercontent.com/96889143/230826808-79feb72d-ff91-45d6-9a9f-958f280270a6.png)
+
+After all relevant items are first deleted, then the delete button will be revealed, running the DELETE(POST) route and removing the item from the database.
+
+## Application In Action
+
+**Catalog Page**  
+https://user-images.githubusercontent.com/96889143/230829305-5b61ca68-5df2-497d-9d5b-4f07ba3cf132.mp4
+
+
