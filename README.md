@@ -106,3 +106,14 @@ After all relevant items are first deleted, then the delete button will be revea
 **Inventory Page**
 ![Inventory Management App - Inventory Page](https://user-images.githubusercontent.com/96889143/230831234-a71a2b85-41a0-42ce-85aa-b4fba335445c.gif)
 
+**Create Theme**
+![Inventory Management App - Create Theme](https://user-images.githubusercontent.com/96889143/230831746-59c42d85-f2b1-4924-a8d0-7cbed89e523f.gif)
+
+**Create Product**
+![Inventory Management App - Create Product](https://user-images.githubusercontent.com/96889143/230831755-6437f84e-69d4-4521-951b-b42ba9ebd243.gif)
+
+**Create Inventory**
+![Inventory Management App - Create Inventory](https://user-images.githubusercontent.com/96889143/230831760-46dabc22-165e-48eb-afb8-a9727e13b095.gif)
+
+**Update Page**
+![Inventory Management App - Update Product](https://user-images.githubusercontent.com/96889143/230831789-b6d35bae-00ae-4d49-83b8-637aff9f5c4e.gif)
