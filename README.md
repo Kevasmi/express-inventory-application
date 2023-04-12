@@ -92,7 +92,8 @@ On the actual UPDATE route, the function runs exactly as a POST route. Using **m
 After all relevant items are first deleted, then the delete button will be revealed, running the DELETE(POST) route and removing the item from the database.
 
 ## Application In Action
-(Sorry about the weird visual bug in the gifs. Something went wrong in the gif making process.)
+
+(Some of you may experience strange graphical glitches in the gifs. Apologies, I am unsure of what is causing it.)
 
 **Sign-Up and Log-In**  
 ![Inventory Management App - Sign-Up and Log-In](https://user-images.githubusercontent.com/96889143/230831084-c759dbae-f3dd-418d-86d4-b6e71a990da8.gif)
